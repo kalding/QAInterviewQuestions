@@ -2,12 +2,49 @@
 
 using namespace std;
 
-void reverse(char* beg, char* end){
+void reverseword(char* beg, char* end){
+  char tmp;
 
+  while(beg < end){
+    tmp = *beg;
+    *beg++ = *end;
+    *end-- = tmp;
+  }
 }
 
-void revstring(char* str){
+void revwholestring(char* str){
+
+  char* end = str;
+  char* keep = str;
+  
+  if (str){
+    while(*end)
+      end++;
+    end--;
+  }
+  
+  reverseword(str, end);
+
+  while (*keep){
+    str = keep;
+    end = keep;
+    while (*end && *end != ' ' ){
+      end++;
+      keep = end;
+    }
+    end--;
+    reverseword(str, end);
+    keep++;
+  }
+  
 }
 
-int main (int argv, char* argv[]){
+int main (int argc, char* argv[]){
+
+  char a[] = "reverse this entire string";
+  revwholestring(a);
+
+  cout << a << endl << endl;
+
+  return 0;
 }
